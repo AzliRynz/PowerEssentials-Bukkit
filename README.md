@@ -69,13 +69,11 @@
 ---
 
 ## 📂 Installation
-
-### **For Bukkit/Spigot/Paper**
 1. Download the latest release from the [Releases page](https://github.com/PowerEssentials/PowerEssentials-Bukkit/releases).
 2. Place the `PowerEssentials.jar` file into your server's `plugins` folder.
 3. Restart your server.
 
-### **For PocketMine-MP**  
+### **For PocketMine-MP** 
 1. Download the latest release from the [Releases page](https://github.com/PowerEssentials/PowerEssentials/releases).
 2. Place the `PowerEssentials.phar` file into your server's `plugins` folder.
 3. Restart your server.
