@@ -1,0 +1,29 @@
+name: PowerEssentials
+main: com.pe.poweressentials.Loader
+version: 1.0
+api-version: 1.17
+author: angga7togk
+description: A powerful Bukkit Essentials plugin
+commands:
+  fly:
+    description: Toggles flight mode
+    usage: /fly [player]
+    aliases: [flight]
+    permission: poweressentials.fly
+  fperm:
+    description: Lists plugin permissions
+    usage: /fperm <plugin>
+    aliases: [fperms]
+    permission: poweressentials.fperm
+permissions:
+  poweressentials.*:
+    description: Gives access to all PowerEssentials commands
+    children:
+      poweressentials.fly: true
+      poweressentials.fperm: true
+  poweressentials.fly:
+    description: Allows using the /fly command
+    default: op
+  poweressentials.fperm:
+    description: Allows checking plugin permissions
+    default: op
