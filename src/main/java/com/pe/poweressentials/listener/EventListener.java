@@ -1,7 +1,7 @@
 package com.pe.poweressentials.listener;
 
 import com.pe.poweressentials.Loader;
-import com.pe.poweressentials.manager.user.UserManager;
+import com.pe.poweressentials.manager.UserManager;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
