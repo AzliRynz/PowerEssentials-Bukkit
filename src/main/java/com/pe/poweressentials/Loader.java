@@ -47,7 +47,7 @@ public class Loader extends JavaPlugin {
                     continue;
                 }
 
-                this.saveResource("lang/" + fileName, false);
+                this.saveResource("lang/" + fileName, true);
             }
 
             new Lang(this);
