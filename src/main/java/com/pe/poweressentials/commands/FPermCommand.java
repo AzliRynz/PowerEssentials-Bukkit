@@ -12,42 +12,42 @@ import com.pe.poweressentials.i18n.Lang;
 
 public class FPermCommand extends Commands {
 
-    public FPermCommand(JavaPlugin plugin) {
-        super(plugin);
-    }
+	public FPermCommand(JavaPlugin plugin) {
+		super(plugin);
+	}
 
-    @Override
-    public boolean run(CommandSender sender, String prefix, Lang lang, String[] args) {
-        if (args.length == 0) {
-            sender.sendMessage(prefix + ChatColor.YELLOW + "/fperm <plugin>");
-            return false;
-        }
+	@Override
+	public boolean run(CommandSender sender, String prefix, Lang lang, String[] args) {
+		if (args.length == 0) {
+			sender.sendMessage(prefix + ChatColor.YELLOW + "/fperm <plugin>");
+			return false;
+		}
 
-        String pluginName = args[0];
-        Plugin plugin = Bukkit.getPluginManager().getPlugin(pluginName);
-        if (plugin == null) {
-            sender.sendMessage(prefix + ChatColor.RED + lang.translateString("messages", "errorPluginNotFound", pluginName, "", ""));
-            return false;
-        }
+		String pluginName = args[0];
+		Plugin plugin = Bukkit.getPluginManager().getPlugin(pluginName);
+		if (plugin == null) {
+			sender.sendMessage(prefix + ChatColor.RED + lang.translateString("messages", "errorPluginNotFound", pluginName, "", ""));
+			return false;
+		}
 
-        Set<Permission> permissions = new HashSet<>(plugin.getDescription().getPermissions());
-        StringBuilder listPerm = new StringBuilder();
+		Set<Permission> permissions = new HashSet<>(plugin.getDescription().getPermissions());
+		StringBuilder listPerm = new StringBuilder();
 
-        if (permissions.isEmpty()) {
-            sender.sendMessage(prefix + ChatColor.RED + lang.translateString("messages", "errorNoPermissions", "", "", ""));
-            return true;
-        }
+		if (permissions.isEmpty()) {
+			sender.sendMessage(prefix + ChatColor.RED + lang.translateString("messages", "errorNoPermissions", "", "", ""));
+			return true;
+		}
 
-        int i = 1;
-        for (Permission perm : permissions) {
-            listPerm.append("\n").append(ChatColor.GOLD).append(" ")
-                    .append(i++).append(". ").append(perm.getName()).append(": ")
-                    .append(perm.getDefault());
-        }
+		int i = 1;
+		for (Permission perm : permissions) {
+			listPerm.append("\n").append(ChatColor.GOLD).append(" ")
+					.append(i++).append(". ").append(perm.getName()).append(": ")
+					.append(perm.getDefault());
+		}
 
-        sender.sendMessage(prefix + lang.translateString2("messages", "resultFperm",
-                plugin.getName(), String.valueOf(permissions.size()), listPerm.toString()));
+		sender.sendMessage(prefix + lang.translateString2("messages", "resultFperm",
+				plugin.getName(), String.valueOf(permissions.size()), listPerm.toString()));
 
-        return true;
-    }
+		return true;
+	}
 }

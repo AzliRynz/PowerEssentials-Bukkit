@@ -18,58 +18,58 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Loader extends JavaPlugin {
 
-    private static Loader instance;
-    private final Map<String, CommandExecutor> commandExecutors = new HashMap<>();
+	private static Loader instance;
+	private final Map<String, CommandExecutor> commandExecutors = new HashMap<>();
 
-    @Override
-    public void onEnable() {
-        instance = this;
-        loadResources();
-        registerCommands();
-    }
+	@Override
+	public void onEnable() {
+		instance = this;
+		loadResources();
+		registerCommands();
+	}
 
-    private void loadResources() {
-        Config.init();
+	private void loadResources() {
+		Config.init();
 
-        File oldLanguageDir = new File(this.getDataFolder(), "language");
-        if (oldLanguageDir.exists() && oldLanguageDir.isDirectory()) {
-            Utils.unlinkRecursive(oldLanguageDir);
-        }
+		File oldLanguageDir = new File(this.getDataFolder(), "language");
+		if (oldLanguageDir.exists() && oldLanguageDir.isDirectory()) {
+			Utils.unlinkRecursive(oldLanguageDir);
+		}
 
-        try {
-            Enumeration<URL> resources = this.getClass().getClassLoader().getResources("language");
+		try {
+			Enumeration<URL> resources = this.getClass().getClassLoader().getResources("language");
 
-            while (resources.hasMoreElements()) {
-                URL resource = resources.nextElement();
-                String fileName = new File(resource.getPath()).getName();
+			while (resources.hasMoreElements()) {
+				URL resource = resources.nextElement();
+				String fileName = new File(resource.getPath()).getName();
 
-                if (!fileName.endsWith("." + Lang.LANGUAGE_EXTENSION)) {
-                    continue;
-                }
+				if (!fileName.endsWith("." + Lang.LANGUAGE_EXTENSION)) {
+					continue;
+				}
 
-                this.saveResource("lang/" + fileName, true);
-            }
+				this.saveResource("lang/" + fileName, true);
+			}
 
-            new Lang(this);
-            Lang.setConsoleLocale(Config.getLang());
+			new Lang(this);
+			Lang.setConsoleLocale(Config.getLang());
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    private void registerCommands() {
-        commandExecutors.put("fly", new FlyCommand(this));
-        commandExecutors.put("fperm", new FPermCommand(this));
+	private void registerCommands() {
+		commandExecutors.put("fly", new FlyCommand(this));
+		commandExecutors.put("fperm", new FPermCommand(this));
 
-        for (Map.Entry<String, CommandExecutor> entry : commandExecutors.entrySet()) {
-            if (!Config.isCommandDisabled(entry.getKey())) {
-                getCommand(entry.getKey()).setExecutor(entry.getValue());
-            }
-        }
-    }
+		for (Map.Entry<String, CommandExecutor> entry : commandExecutors.entrySet()) {
+			if (!Config.isCommandDisabled(entry.getKey())) {
+				getCommand(entry.getKey()).setExecutor(entry.getValue());
+			}
+		}
+	}
 
-    public static Loader getInstance() {
-        return instance;
-    }
+	public static Loader getInstance() {
+		return instance;
+	}
 }
